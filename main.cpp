@@ -1,11 +1,15 @@
 #include "struct.h"
 #include <stdio.h>
-void printMain() {
-	printf("this is first page.\n");
+void setup() {
+
+
 }
-void printSon() {
-	printf("this is second page.\n");
+void loop() {
+
 }
 void main() {
-	
+	setup();
+	while (true){
+		loop();
+	}
 }

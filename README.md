@@ -1,2 +1,1 @@
-# Struct
-a new structure for Controller 
+# “≥√Êπ‹¿Ì
