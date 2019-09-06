@@ -19,39 +19,39 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="struct.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="page.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="action.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="order.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="struct.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="page.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="action.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="order.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="README.md">
       <Filter>文档</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\action.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\order.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\page.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\struct.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\action.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\order.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\page.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\struct.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -76,6 +76,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\王听正\source\repos\Struct\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -123,20 +124,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="action.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="order.cpp" />
-    <ClCompile Include="page.cpp" />
-    <ClCompile Include="struct.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="action.h" />
-    <ClInclude Include="order.h" />
-    <ClInclude Include="page.h" />
-    <ClInclude Include="struct.h" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\action.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\order.cpp" />
+    <ClCompile Include="src\page.cpp" />
+    <ClCompile Include="src\struct.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\action.h" />
+    <ClInclude Include="include\order.h" />
+    <ClInclude Include="include\page.h" />
+    <ClInclude Include="include\struct.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
