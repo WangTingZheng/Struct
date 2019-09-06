@@ -1,15 +1,8 @@
 #include "struct.h"
 #include <stdio.h>
-void setup() {
 
-
-}
-void loop() {
-
-}
-void main() {
-	setup();
-	while (true){
-		loop();
-	}
+int main() {
+	initPageList();
+	printf("%d", findLastPageList(&(returnHead())).id);
+	return 0;
 }

@@ -123,10 +123,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="action.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="order.cpp" />
+    <ClCompile Include="page.cpp" />
     <ClCompile Include="struct.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="action.h" />
+    <ClInclude Include="order.h" />
+    <ClInclude Include="page.h" />
     <ClInclude Include="struct.h" />
   </ItemGroup>
   <ItemGroup>
