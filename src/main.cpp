@@ -3,6 +3,6 @@
 
 int main() {
 	initPageList();
-	printf("%d", findLastPageList(&(returnHead())).id);
+	printf("%d", findIdSame(&returnHead(),1));
 	return 0;
 }

@@ -10,22 +10,33 @@ struct PageList pageList;
 形参：无
 返回值：无
 */
-void initPageList() {//
+void initPageList() {
 	pageList.id = nullID;
 	pageList.nextPageList = nullptr;
 	pageList.page = nullptr;
 }
+/*
+功能简述：判断id是否重复
+形参：pagelist：链表的头节点的地址
+	  id：要搜索的id
+返回值：重复：true，不重复：false
+*/
+
 bool findIdSame(PageList *pagelist,int id) {
 	if ((*pagelist).id != id && (*pagelist).nextPageList != nullptr) findIdSame((*pagelist).nextPageList, id);
 	else if ((*pagelist).id == id) return true;
 	else return false;
 }
+
+
 void newPageList(int id,Page* page,PageList *next) {//在链表最后新增加一个节点
 	PageList myPageListLast = findLastPageList(&pageList);
 	myPageListLast.id = id;
 	myPageListLast.nextPageList = nullptr;
 	myPageListLast.page = page;
 }
+
+
 void detectPageList(int id) { //删除固定id的节点
 	PageList myPageListFont=findPageListFont(&pageList,id);//找到id前的一个节点
 	PageList myPageList = findPageList(&pageList,id);//找到id对应的节点
@@ -75,7 +86,10 @@ PageList returnHead() {
 
 
 
-
+/*
+功能简述：为某一个页面新建一组子页面
+形参：CON：
+*/
 NextPageNode newNextPage(bool CON,int ID,NextPageNode *NEXT) {
 	struct  NextPageNode myNode;
 	myNode.condition = CON;

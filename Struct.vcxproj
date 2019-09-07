@@ -124,6 +124,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="README-CN.md" />
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
