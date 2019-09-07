@@ -42,6 +42,9 @@
     <ClCompile Include="src\struct.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="src\find.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\action.h">
@@ -54,6 +57,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="include\struct.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\find.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

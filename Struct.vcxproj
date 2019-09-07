@@ -129,6 +129,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\action.cpp" />
+    <ClCompile Include="src\find.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\order.cpp" />
     <ClCompile Include="src\page.cpp" />
@@ -136,6 +137,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\action.h" />
+    <ClInclude Include="include\find.h" />
     <ClInclude Include="include\order.h" />
     <ClInclude Include="include\page.h" />
     <ClInclude Include="include\struct.h" />

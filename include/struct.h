@@ -1,9 +1,6 @@
 #ifndef __STRUCT_H_
 #define __STRUCT_H_
 
-#include <malloc.h>
-#include <string.h>
-
 /*
 	子页面链表的子节点
 	condition：跳转条件
@@ -12,18 +9,17 @@
 */
 struct NextPageNode {
 	bool condition;//跳转的条件是否成立，当它为true的时候，这个节点就会跳转
-	int id; //此页的id
+	struct Page* page;
 	struct NextPageNode* next;  //下一个节点的地址
 };
 
 /*
 	页面
-	id：页面id
+	function:页面实现函数指针
 	head：子页面链表，这里储存的是链表的表头
 */
 struct Page {
-	int id;   //这个节点的id
-	//void(*function)(void); //页面对应的函数
+	void(*function)(void); //页面对应的函数
 	struct NextPageNode* head;//这个页面的子页面的链表集合
 };
 
@@ -34,22 +30,17 @@ struct Page {
 	page：当前子页面的页面指针
 	nextPageList：下一个子页面
 */
-struct PageList { 
-	int id;
-	struct Page* page;
-	struct PageList* nextPageList;
-};
+
+NextPageNode newNextPage(bool CON, Page* page, NextPageNode* NEXT);
+void addNode(NextPageNode* HEAD, NextPageNode* next);
+bool detectNode(NextPageNode* HEAD, Page* page);
+NextPageNode findLast(NextPageNode* HEAD);
+NextPageNode findPageInNode(NextPageNode* HEAD, Page* page);
 
 
+Page newPage(void(function)(void), NextPageNode* HEAD);
 
-void initPageList(); 
-void newPageList(int id, Page* page, PageList* next);
-void detectPageList(int id);
-PageList findPageListFont(PageList* pagelist, int id);
-PageList findPageList(PageList* pagelist, int id);
-PageList findLastPageList(PageList* pagelist);
-PageList returnHead();
-bool findIdSame(PageList* pagelist, int id);
+Page switchPage(Page* page, NextPageNode* HEAD);
 
 #endif
 

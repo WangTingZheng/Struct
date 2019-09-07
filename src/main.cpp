@@ -1,8 +1,9 @@
 #include "struct.h"
-#include <stdio.h>
-
+#include "page.h"
 int main() {
-	initPageList();
-	printf("%d", findIdSame(&returnHead(),1));
-	return 0;
+	
+	Page mainPage=newPage(page_1_1, &(newNextPage(false, &newPage(page_1_2, nullptr), nullptr)));
+	mainPage.function();
+	mainPage.head->condition = true;
+	switchPage(&mainPage, mainPage.head);
 }

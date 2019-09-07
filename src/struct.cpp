@@ -1,123 +1,97 @@
 #include "struct.h"
-#define nullID -1
-struct PageList pageList;
-
-/*
-功能简述：初始化页面链表，也就是初始化头节点
-功能详述：初始化头节点的id为nullID,
-		  下一个节点的地址为空
-		  当前页面为空
-形参：无
-返回值：无
-*/
-void initPageList() {
-	pageList.id = nullID;
-	pageList.nextPageList = nullptr;
-	pageList.page = nullptr;
-}
-/*
-功能简述：判断id是否重复
-形参：pagelist：链表的头节点的地址
-	  id：要搜索的id
-返回值：重复：true，不重复：false
-*/
-
-bool findIdSame(PageList *pagelist,int id) {
-	if ((*pagelist).id != id && (*pagelist).nextPageList != nullptr) findIdSame((*pagelist).nextPageList, id);
-	else if ((*pagelist).id == id) return true;
-	else return false;
-}
 
 
-void newPageList(int id,Page* page,PageList *next) {//在链表最后新增加一个节点
-	PageList myPageListLast = findLastPageList(&pageList);
-	myPageListLast.id = id;
-	myPageListLast.nextPageList = nullptr;
-	myPageListLast.page = page;
-}
-
-
-void detectPageList(int id) { //删除固定id的节点
-	PageList myPageListFont=findPageListFont(&pageList,id);//找到id前的一个节点
-	PageList myPageList = findPageList(&pageList,id);//找到id对应的节点
-	if (myPageList.nextPageList != nullptr)
-		myPageListFont.nextPageList = myPageList.nextPageList;//把id前的节点的next跨过id,连接到后一个
-	else myPageListFont.nextPageList = nullptr;
-}
-
-/*
-功能简述：返回id等于形参的节点的前一个节点
-形参：pagelist：上一个节点的地址
-	  id：所要查找的id
-返回值：pagelist：找到的节点（它本身，不是地址）
-*/
-PageList findPageListFont(PageList* pagelist, int id) {   //找到固定id的节点
-	if ((*(*pagelist).nextPageList).id != id) findPageList((*pagelist).nextPageList, id);
-	return *pagelist;
-}
-
-/*
-功能简述：返回id等于形参的节点
-形参：pagelist：上一个节点的地址
-	  id：所要查找的id
-返回值：pagelist：找到的节点（它本身，不是地址）
-*/
-
-PageList findPageList(PageList *pagelist,int id) {//找到固定id的节点
-	return (*findPageListFont(pagelist,id).nextPageList);
-}
-/*
-功能简述：找到链表的最后一个节点
-形参：pagelist：上一个节点的地址，一般从头节点开始
-返回值：最后一个节点本身
-*/
-PageList findLastPageList(PageList *pagelist) {//找到链表的最后一个节点
-	if ((*pagelist).nextPageList != nullptr) findLastPageList((*pagelist).nextPageList);
-	return *pagelist;
-}
-/*
-功能简述：返回链表的头节点本身
-形参：无
-返回值：头节点本身
-*/
-PageList returnHead() {
-	return pageList;
-}
-
-
-
+struct NextPageNode nullNode;
 /*
 功能简述：为某一个页面新建一组子页面
-形参：CON：
+形参：CON：触发条件
+	  function：子页面对应的函数
+	  NEXT：下一个链表节点
 */
-NextPageNode newNextPage(bool CON,int ID,NextPageNode *NEXT) {
+NextPageNode newNextPage(bool CON, Page *page,NextPageNode *NEXT) {
 	struct  NextPageNode myNode;
 	myNode.condition = CON;
 	myNode.next = NEXT;
-	myNode.id = ID;
+	myNode.page= page;
 	return myNode;
 }
-NextPageNode addNode(NextPageNode* HEAD, NextPageNode* next) { //在头节点为HEAD的链表里添加一个next
-
-	return *HEAD;
+/*
+功能简述：在一个子页面链表中查找最后一个
+形参：HEAD:链表头节点
+返回值：最后一个节点
+*/
+NextPageNode findLast(NextPageNode* HEAD) {
+	if (HEAD->next != nullptr) findLast(HEAD->next); //如果还没到最后一个，就继续推进
+	return *(HEAD);  //到了最后，给最后一个添加一个节点
 }
-NextPageNode detectNode(NextPageNode* HEAD, int id) {//在头节点为HEAD的链表里删除一个固定id的节点
-	return *HEAD;
+/*
+功能简述：找到特定page的节点
+形参：HEAD：链表头节点
+	  page：要找的页面的地址
+返回值：找到了：找到的地址
+	    没找到：空
+*/
+NextPageNode findPageInNode(NextPageNode *HEAD,Page* page) {
+	if (HEAD->next == nullptr) return nullNode;//如果找到最后没找到
+	if (HEAD->next->page != page) findPageInNode(HEAD->next, page);  //如果下个的page不是想找的，则继续找
+	return *(HEAD->next);
+}
+/*
+功能简述：在链表最后添加一个节点
+形参：HEAD：链表的头节点
+	  head：要加的节点
+返回值：无
+*/
+void addNode(NextPageNode* HEAD, NextPageNode* next) { //在头节点为HEAD的链表里添加一个next
+	if (HEAD->next != nullptr) addNode(HEAD->next, next); //如果还没到最后一个，就继续推进
+	HEAD->next = next;  //到了最后，给最后一个添加一个节点
+}
+/*
+功能简述：删除一个页面为page的节点
+形参：HEAD:链表头文件
+	  page：要查询的页面
+返回值：false：没找到，删除失败
+		true：找到，删除成功
+*/
+bool detectNode(NextPageNode* HEAD,Page *page) {
+	if (HEAD->next == nullptr) return false;//如果找到最后没找到
+	if (HEAD->next->page != page) detectNode(HEAD->next, page);  //如果下个的page不是想找的，则继续找
+	if (HEAD->next->next == nullptr) { HEAD->next = nullptr; return true; } //此时HEAD就是要找的节点是上一个节点，如果它没有下下个，说明要找的节点为最后一个
+	else HEAD->next = HEAD->next->next; return true;//把要删除的节点的下一个赋值给它的上一个的下一个
 }
 
-Page newPage(int ID,NextPageNode *HEAD) {
+
+
+
+
+/*
+功能简述：新建一个页面
+形参：function：此页面对应的函数地址
+	  HEAD：子页面头节点
+返回值：一个新的页面
+*/
+
+Page newPage(void(function)(void),NextPageNode *HEAD) {
 	struct Page myPage;
-	myPage.id = ID;
+	myPage.function= function;
 	myPage.head = HEAD;
 	return myPage;
 }
 
-/*
-Page findPage(int id) {
 
-}
+
+/*
+功能简述：遍历一个页面的子页面链表，执行符合条件的页面的函数
+形参： HEAD:子页面链表的头节点
+返回值：遍历之后下一个页面，如果没有切换，返回的还是本页面
+		如果有切换，返回的是下一个页面
 */
 
-void importOrder(int fontID,int afterID) {
+Page switchPage(Page *page,NextPageNode *HEAD) {
+	if (HEAD == nullptr) return *page; //如果到头了，则退出，返回原来的页面
+	else if (HEAD->condition == false) switchPage(page,HEAD->next);//如果没到，如果不满足跳转条件，则继续找下一个
 
+	HEAD->page->function();//如果找到了，执行函数
+	return *(HEAD->page);//返回下个页面的page
 }
+
